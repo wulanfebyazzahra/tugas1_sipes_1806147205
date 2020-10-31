@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Form Tambah Pesawat</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Form Tambah Pesawat')"></nav>
+    <br><br>
+    <h2 class="text-center">Form Tambah Pesawat</h2>
+    <div class="card m-5 p-3">
+        <form th:action="@{/pesawat/tambah}" th:object="${pesawat}" method="POST">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <p> Maskapai :</p>
+                    <br>
+                   <p> Tanggal Dibuat : </p>
+                    <br>
+                    <p> Tempat Dibuat : </p>
+                    <br>
+                   <p> Jenis Pesawat : </p>
+                    <br>
+                   <p> Tipe : </p>
+                    <br>
+                   <p> Teknisi : </p>
+                </div>
+                <div class="col">
+                    <input class="form-control" type="text" th:field="*{maskapai}" required/>
+                    <br>
+                    <input type="date" th:field="*{tanggal_dibuat}" class="form-control"/>
+                    <br>
+                    <input class="form-control" type="text" th:field="*{tempat_dibuat}" required/>
+                    <br>
+                    <select th:field="*{jenis_pesawat}" class="form-control">
+                        <option value="Komersial">Komersial</option>
+                        <option value="Militer">Militer</option>
+                    </select>
+                    <br>
+                    <select th:field="*{tipe.id}" class="form-control">
+                        <option value="0"> Pilih Tipe </option>
+                        <option th:each="tipe : ${listTipe}" th:value="${tipe.id}" th:text="${tipe.nama}"></option>
+                    </select>
+                    <br>
+                    <table>
+                        <tr th:each="listTeknisi, iterationStatus : *{listTeknisi}">
+                            <td>
+                                <select th:field="*{listTeknisi[__${iterationStatus.index}__].id}" class="form-control">
+                                    <option value="0"> Pilih Teknisi </option>
+                                    <option th:each="teknisi : ${listAllTeknisi}"
+                                                th:value="${teknisi.id}"
+                                                th:utext="${teknisi.nama}"></option>
+                                </select>
+                            </td>
+                            <td>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <button type="submit" class="btn btn-outline-primary" style="width: inherit" name="tambah">+ Tambah Teknisi</button>
+                </div>
+            </div>
+        </div>
+            <br><br>
+            <div class="text-center">
+            <button class="btn btn-primary" style="position: center" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

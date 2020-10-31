@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Daftar Pesawat</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Daftar Pesawat')"></nav>
+    <br>
+    <h2 class="text-center">Daftar Pesawat</h2>
+    <div class="text-center">
+        <a class="btn btn-primary" th:href="@{/pesawat/tambah}">+Tambah Pesawat</a>
+    </div>
+    <div class="card m-5 p-6">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nomor Seri</th>
+                <th>Tipe Pesawat</th>
+                <th>Jenis Pesawat</th>
+                <th>Maskapai</th>
+                <th>Aksi</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="pesawat, iterationStatus: ${pesawat}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${pesawat.nomor_seri}"></td>
+                <td th:text="${pesawat.tipe.nama}"></td>
+                <td th:text="${pesawat.jenis_pesawat}"></td>
+                <td th:text="${pesawat.maskapai}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/pesawat/} + ${pesawat.id}" >Lihat</a>
+                    <a class="btn btn-warning" th:href="@{/pesawat/ubah/} + ${pesawat.id}" >Ubah</a>
+                    <a class="btn btn-danger" th:href="@{/pesawat/hapus/} + ${pesawat.id}">Hapus</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>
