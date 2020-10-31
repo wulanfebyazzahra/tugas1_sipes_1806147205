@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Daftar Penerbangan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Penerbangan')"></nav>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>Id</p>
+            <p>Kode Penerbangan</p>
+            <p>Bandara Asal</p>
+            <p>Bandara Tujuan</p>
+            <p>Waktu Berangkat</p>
+            <p>Nomor seri Pesawat</p>
+        </div>
+        <div class="col">
+            <p th:text="${penerbangan.id}"></p>
+            <p th:text="${penerbangan.nomor_penerbangan}"></p>
+            <p th:text="${penerbangan.kode_bandara_asal}"></p>
+            <p th:text="${penerbangan.kode_bandara_tujuan}"></p>
+            <p th:text="${penerbangan.waktu_berangkat}"></p>
+            <div th:if="${hasPesawat}">
+                <p th:text="${penerbangan.pesawat.nomorSeri}"></p>
+            </div>
+            <div th:unless="${hasPesawat}">
+                <p th:text="'Belum diassign pesawat'"></p>
+            </div>
+            </div>
+            </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Daftar Penerbangan</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Daftar Penerbangan')"></nav>
+    <br>
+    <h2 class="text-center">Daftar Penerbangan</h2>
+    <div class="text-center">
+        <a class="btn btn-primary" th:href="@{/penerbangan/tambah}">+Tambah Penerbangan</a>
+    </div>
+    <div class="card m-5 p-6">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nomor Penerbangan</th>
+                <th>Bandara Asal</th>
+                <th>Bandara Tujuan</th>
+                <th>Waktu Berangkat</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="penerbangan, iterationStatus: ${listPenerbangan}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${penerbangan.nomor_penerbangan}"></td>
+                <td th:text="${penerbangan.kode_bandara_asal}"></td>
+                <td th:text="${penerbangan.kode_bandara_tujuan}"></td>
+                <td th:text="${penerbangan.waktu_berangkat}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{/penerbangan/} + ${penerbangan.id}" >Lihat</a>
+                    <a class="btn btn-warning" th:href="@{/penerbangan/ubah/} + ${penerbangan.id}" >Ubah</a>
+                    <a class="btn btn-danger" th:href="@{/penerbangan/hapus/} + ${penerbangan.id}">Hapus</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>

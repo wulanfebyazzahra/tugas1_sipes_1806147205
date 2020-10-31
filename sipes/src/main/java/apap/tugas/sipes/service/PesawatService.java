@@ -4,10 +4,12 @@ import apap.tugas.sipes.model.PesawatModel;
 
 public interface PesawatService {
     List<PesawatModel>getPesawatList();
-    void tambahPesawat(PesawatModel pesawat);
-    PesawatModel updatePesawat(PesawatModel pesawat);
+    
+    void addPesawat(PesawatModel pesawat);
     void deletePesawat(PesawatModel pesawat);
-    List<String> getListNomorSeri();
+
     PesawatModel getPesawatById(Long id);
+    PesawatModel updatePesawat(PesawatModel pesawat);
+
     String nomorSeri(PesawatModel pesawat);
 }

@@ -4,5 +4,6 @@ import apap.tugas.sipes.model.TipeModel;
 
 public interface TipeService {
     List<TipeModel> getListTipe();
+    
     TipeModel getTipeById(Long id);
 }

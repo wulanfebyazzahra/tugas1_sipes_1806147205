@@ -27,17 +27,46 @@ public class PesawatServiceImpl implements PesawatService {
     }
 
     @Override
-    public void tambahPesawat(PesawatModel pesawat){
+    public void addPesawat(PesawatModel pesawat){
         String noSeri = nomorSeri(pesawat);
-        pesawat.setNomor_seri(noSeri);
-        pesawat.setTanggal_dibuat(LocalDate.now());
+
+        // set tipe
         pesawat.setTipe(tipeService.getTipeById(pesawat.getTipe().getId()));
+
+        // set tanggal hari ini sebagai tanggal dibuat
+        pesawat.setTanggal_dibuat(LocalDate.now());
+
+        // set nomor seri
+        pesawat.setNomor_seri(noSeri);
+
         pesawatDb.save(pesawat);
     }
 
     @Override
     public PesawatModel getPesawatById(Long id) {
         return pesawatDb.findById(id).get();
+    }
+
+    @Override
+	public PesawatModel updatePesawat(PesawatModel pesawat) {
+        String noSeri = nomorSeri(pesawat);
+
+        PesawatModel p = pesawatDb.findById(pesawat.getId()).get();
+        p.setTempat_dibuat(pesawat.getTempat_dibuat());
+        p.setJenis_pesawat(pesawat.getJenis_pesawat());
+        p.setMaskapai(pesawat.getMaskapai());
+        p.setTanggal_dibuat(pesawat.getTanggal_dibuat());
+        p.setTipe(tipeService.getTipeById(pesawat.getTipe().getId()));
+
+        // set nomor seri lagi
+        p.setNomor_seri(noSeri);
+        pesawatDb.save(p);
+        return p;
+    }
+
+    @Override
+    public void deletePesawat(PesawatModel pesawat) {
+        pesawatDb.delete(pesawat);
     }
 
     @Override
@@ -48,17 +77,17 @@ public class PesawatServiceImpl implements PesawatService {
         String jenis = "";
         if (pesawat.getJenis_pesawat().equals("Komersial")){
             jenis="1";
-        }else{
+        } else{
             jenis="2";
         }
 
         String tipe = "";
-
-        // tipe harus diset dahulu baru bisa diambil namanya
-        TipeModel tp = tipeService.getTipeById(pesawat.getTipe().getId());
-        pesawat.setTipe(tp);
-
-        if(pesawat.getTipe().getNama().equals("ATR")){
+        // set tipe dulu agar bisa ambil namanya
+        pesawat.setTipe(tipeService.getTipeById(pesawat.getTipe().getId()));
+        if(pesawat.getTipe().getNama().equals("Boeing")){
+            tipe="BO";
+        }
+        else if(pesawat.getTipe().getNama().equals("ATR")){
             tipe="AT";
         }
         else if(pesawat.getTipe().getNama().equals("Airbus")){
@@ -66,9 +95,6 @@ public class PesawatServiceImpl implements PesawatService {
         }
         else if(pesawat.getTipe().getNama().equals("Bombardier")) {
             tipe="BB";
-        }
-        else if(pesawat.getTipe().getNama().equals("BOEING")){
-            tipe="BO";
         }
 
         Integer tahun = pesawat.getTanggal_dibuat().getYear();
@@ -89,24 +115,5 @@ public class PesawatServiceImpl implements PesawatService {
         noSeri = jenis + tipe + thndibalik + thntambah + random;
         return noSeri;
     }
-    
-    @Override
-	public PesawatModel updatePesawat(PesawatModel pesawat) {
-        String noSeri = nomorSeri(pesawat);
 
-        PesawatModel p = pesawatDb.findById(pesawat.getId()).get();
-        p.setTempat_dibuat(pesawat.getTempat_dibuat());
-        p.setJenis_pesawat(pesawat.getJenis_pesawat());
-        p.setNomor_seri(noSeri);
-        p.setMaskapai(pesawat.getMaskapai());
-        p.setTanggal_dibuat(pesawat.getTanggal_dibuat());
-        p.setTipe(tipeService.getTipeById(pesawat.getTipe().getId()));
-        pesawatDb.save(p);
-        return p;
-    }
-
-    @Override
-    public void deletePesawat(PesawatModel pesawat) {
-        pesawatDb.delete(pesawat);
-    }
 }

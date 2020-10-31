@@ -3,18 +3,19 @@ import apap.tugas.sipes.model.PenerbanganModel;
 import apap.tugas.sipes.model.PesawatModel;
 import apap.tugas.sipes.model.TeknisiModel;
 import apap.tugas.sipes.model.TipeModel;
+
 import apap.tugas.sipes.service.PenerbanganService;
 import apap.tugas.sipes.service.PesawatService;
 import apap.tugas.sipes.service.TeknisiService;
 import apap.tugas.sipes.service.TipeService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 public class PesawatController{
@@ -36,16 +37,16 @@ public class PesawatController{
     }
 
     @GetMapping("/pesawat")
-    private String viewPesawat(Model model){
+    private String viewAllPesawat(Model model){
         // ambil semua pesawat
         List<PesawatModel> pesawat = pesawatService.getPesawatList();
-        
+
         model.addAttribute("pesawat", pesawat);
         return "viewall-pesawat";
     }
 
     @GetMapping("/pesawat/{id}")
-    public String detailPesawat(
+    public String viewDetailPesawat(
             @PathVariable Long id,
             Model model
     ){
@@ -59,7 +60,7 @@ public class PesawatController{
     }
 
     @GetMapping("/pesawat/tambah")
-    public String formTambahPesawat(
+    public String addPesawatForm(
             Model model){
         // buat pesawat dan teknisi baru
         PesawatModel pesawat = new PesawatModel();
@@ -111,7 +112,7 @@ public class PesawatController{
     }
 
     @PostMapping("/pesawat/tambah")
-    public String submitTambahPesawat(
+    public String addPesawatSubmit(
             @ModelAttribute PesawatModel pesawat, Model model
     ){
         // bikin list untuk teknisi
@@ -124,13 +125,13 @@ public class PesawatController{
         // simpen ke db
         pesawat.setListTeknisi(listTeknisi);
         // simpen pesawat barunya
-        pesawatService.tambahPesawat(pesawat);
+        pesawatService.addPesawat(pesawat);
         model.addAttribute("pesawat", pesawat);
         return "add-pesawat";
     }
 
     @GetMapping("/pesawat/ubah/{id}")
-    public String formUpdatePesawat(
+    public String updatePesawatForm(
             @PathVariable Long id, Model model
     ){
         // ambil pesawat dari id
@@ -140,7 +141,7 @@ public class PesawatController{
     }
 
     @PostMapping("/pesawat/ubah")
-    public String submitUpdatePesawat(
+    public String updatePesawatSubmit(
             @ModelAttribute PesawatModel pesawat, Model model
     ){
         // update pesawat di service
@@ -150,7 +151,7 @@ public class PesawatController{
     }
 
     @GetMapping("/pesawat/hapus/{id}")
-    public String hapusPesawat(
+    public String deletePesawat(
         @PathVariable Long id,
         Model model
     ){
