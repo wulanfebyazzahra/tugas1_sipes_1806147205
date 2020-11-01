@@ -8,9 +8,8 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar('Detail Penerbangan')"></nav>
 <br><br>
-<h2 class="text-center">Detail Penerbangan</h2>
-<br>
 <div class="card col-sm-4 offset-lg-4 shadow p-3 mb-5 bg-white rounded" style="align-content: center">
+    <h2 class="text-center">Detail Penerbangan</h2>
     <br>
 <div class="container">
     <div class="row">
@@ -27,7 +26,7 @@
             <p th:text="${penerbangan.kode_bandara_tujuan}"></p>
             <p th:text="${penerbangan.waktu_berangkat}"></p>
             <div th:if="${hasPesawat}">
-                <p th:text="${penerbangan.pesawat.nomorSeri}"></p>
+                <p th:text="${penerbangan.pesawat.nomor_seri}"></p>
             </div>
             <div th:unless="${hasPesawat}">
                 <p th:text="'Belum diassign pesawat'"></p>

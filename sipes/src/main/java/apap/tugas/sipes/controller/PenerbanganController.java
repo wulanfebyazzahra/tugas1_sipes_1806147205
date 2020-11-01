@@ -83,6 +83,7 @@ public class PenerbanganController{
         @PathVariable Long id,
         Model model
     ){
+        // hapus di service
         PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(id);
         penerbanganService.deletePenerbangan(penerbangan);
         model.addAttribute("penerbangan", penerbangan);

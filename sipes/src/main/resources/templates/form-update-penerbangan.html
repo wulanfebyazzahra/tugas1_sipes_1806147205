@@ -8,8 +8,8 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar('Form Ubah Penerbangan')"></nav>
     <br><br>
-    <h2 class="text-center">Form Ubah Penerbangan</h2>
     <div class="card col-sm-6 offset-3 shadow p-3 mb-5 bg-white rounded">
+        <h2 class="text-center">Form Ubah Penerbangan</h2>
         <br>
         <form th:action="@{/penerbangan/ubah}" th:object="${penerbangan}" method="POST">
             <input class="form-control" type="hidden" th:field="*{id}"/>

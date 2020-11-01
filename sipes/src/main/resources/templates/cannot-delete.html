@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Error</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Error')"></nav>
+<br><br><br><br><br><br><br><br><br><br>
+<h2 class ="text-center" th:text="'Pesawat dengan nomor seri ' + ${pesawat.nomor_seri} + ' gagal dihapus karena memiliki penerbangan'"></h2>
+<br>
+<div class="text-center">
+    <a class="btn btn-primary" th:href="@{/pesawat}">Daftar Pesawat</a>
+</div>
+</body>
+</html>

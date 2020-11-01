@@ -1,13 +1,10 @@
 package apap.tugas.sipes.service;
 
 import apap.tugas.sipes.model.PesawatModel;
-import apap.tugas.sipes.model.TipeModel;
 import apap.tugas.sipes.repository.PesawatDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -46,6 +43,7 @@ public class PesawatServiceImpl implements PesawatService {
 
     @Override
 	public PesawatModel updatePesawat(PesawatModel pesawat) {
+        // generate nomor seri dulu
         String noSeri = nomorSeri(pesawat);
 
         PesawatModel p = pesawatDb.findById(pesawat.getId()).get();

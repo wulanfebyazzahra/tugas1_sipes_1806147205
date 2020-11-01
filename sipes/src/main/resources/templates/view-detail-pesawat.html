@@ -8,8 +8,8 @@
 <body>
 <nav th:replace="fragments/fragment :: navbar('Detail Pesawat')"></nav>
 <br><br>
-<h2 class="text-center">Detail Pesawat</h2>
 <div class="card col-sm-4 offset-lg-4 shadow p-3 mb-5 bg-white rounded" style="align-content: center">
+    <h2 class="text-center">Detail Pesawat</h2>
     <br>
 <div class="container">
     <div class="row">
@@ -34,24 +34,73 @@
 </div>
 </div>
 
-<h5 class="text-center">Daftar Teknisi Pesawat</h5>
-<div class="card col-sm-4 offset-lg-4 p-4 shadow p-3 mb-5 bg-white rounded" style="align-content: center">
-<table class="table">
-    <thead>
-    <tr>
-        <th>No</th>
-        <th>Nama</th>
-        <th>Nomor Telepon</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="teknisi, iterationStatus: ${listTeknisi}">
-        <td th:text="${iterationStatus.count}"></td>
-        <td th:text="${teknisi.nama}"></td>
-        <td th:text="${teknisi.nomor_telepon}"></td>
-    </tr>
-    </tbody>
-</table>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <br><br><br><br>
+            <div class="card col-sm-25 shadow p-3 mb-5 bg-white rounded" style="align-content: center">
+                <h5 class="text-center">Daftar Teknisi Pesawat</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Nomor Telepon</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="teknisi, iterationStatus: ${listTeknisi}">
+                            <td th:text="${iterationStatus.count}"></td>
+                            <td th:text="${teknisi.nama}"></td>
+                            <td th:text="${teknisi.nomor_telepon}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col">
+                <form th:action="@{'/pesawat/'+${pesawat.id}+'/tambah-penerbangan'}" th:object="${pesawat}" method = "POST">
+                    <select class="form-control" name="idSelected" style="width: 300px; margin-left: 400px">
+                        <option value="0" selected>Nomor Penerbangan</option>
+                        <option th:each="p : ${pilihan}" th:text="${p.nomor_penerbangan}" th:value="${p.id}"></option>
+                    </select>
+                    <div class="text-right">
+                        <button class="btn btn-primary" type="submit">Tambah</button>
+                    </div>
+                </form>
+            <br>
+
+            <div class="card col-sm-25 shadow p-3 mb-5 bg-white rounded" style="align-content: center">
+                <h5 class="text-center">Daftar Penerbangan</h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nomor Penerbangan</th>
+                        <th>Bandara Asal</th>
+                        <th>Bandara Tujuan</th>
+                        <th>Waktu Berangkat</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="penerbangan, iterationStatus : ${listPenerbangan}">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${penerbangan.nomor_penerbangan}"></td>
+                        <td th:text="${penerbangan.kode_bandara_asal}"></td>
+                        <td th:text="${penerbangan.kode_bandara_tujuan}"></td>
+                        <td th:text="${penerbangan.waktu_berangkat}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="text-center">
+                <h6 class="text-success" th:text="${notifikasi}"></h6>
+            </div>
+            <br><br><br>
+        </div>
+    </div>
 </div>
 </body>
 </html>
