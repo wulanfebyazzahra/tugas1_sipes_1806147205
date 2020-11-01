@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
-    <title>Filter Pesawat</title>
+    <title>Cari Pesawat</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar('Filter Pesawat')"></nav>
+<nav th:replace="fragments/fragment :: navbar('Cari Pesawat')"></nav>
 <br><br>
 <div class="card col-sm-4 offset-lg-4 shadow p-3 mb-5 bg-white rounded" style="align-content: center">
-    <h2 class="text-center">Filter Pesawat</h2>
+    <h2 class="text-center">Cari Pesawat</h2>
     <br>
     <div class="container">
     <form th:action="@{/pesawat/filter}" method="GET">
         Penerbangan : <br>
         <select name="idPenerbangan" class="form-control">
-            <option value="0"> -- </option>
+            <option value="0"> Pilih Penerbangan </option>
             <option th:each="penerbangan : ${listPenerbangan}"
                     th:value="${penerbangan.id}"
                     th:text="${penerbangan.nomor_penerbangan}"></option>
         </select>
         Tipe : <br>
         <select name="idTipe" class="form-control">
-            <option value="0"> -- </option>
+            <option value="0"> Pilih Tipe Pesawat </option>
             <option th:each="tipe : ${listTipe}"
                     th:value="${tipe.id}"
                     th:text="${tipe.nama}"></option>
         </select>
         Teknisi : <br>
         <select name="idTeknisi" class="form-control">
-            <option value="0"> -- </option>
+            <option value="0"> Pilih Teknisi </option>
             <option th:each="teknisi : ${listTeknisi}"
                     th:value="${teknisi.id}"
                     th:text="${teknisi.nama}"></option>
         </select>
     <br>
         <div class="text-center">
-            <button class="btn btn-primary" style="position: center" type="submit">Submit</button>
+            <button class="btn btn-primary" style="position: center" type="submit">Cari</button>
         </div>
 </form>
     </div>
