@@ -32,6 +32,7 @@ public class PenerbanganServiceImpl implements PenerbanganService {
     public PenerbanganModel updatePenerbangan(PenerbanganModel penerbangan) {
         // ambil penerbangan yang di db
         PenerbanganModel p = penerbanganDb.findById(penerbangan.getId()).get();
+
         // set data baru
         p.setKode_bandara_tujuan(penerbangan.getKode_bandara_tujuan());
         p.setWaktu_berangkat(penerbangan.getWaktu_berangkat());

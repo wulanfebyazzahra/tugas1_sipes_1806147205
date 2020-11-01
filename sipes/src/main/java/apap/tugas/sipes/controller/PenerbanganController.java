@@ -1,4 +1,5 @@
 package apap.tugas.sipes.controller;
+
 import apap.tugas.sipes.model.PenerbanganModel;
 import apap.tugas.sipes.service.PenerbanganService;
 
@@ -19,6 +20,7 @@ public class PenerbanganController{
     private String viewAllPenerbangan(Model model){
         // ambil semua penerbangan
         List<PenerbanganModel> listPenerbangan = penerbanganService.getListPenerbangan();
+
         model.addAttribute("listPenerbangan", listPenerbangan);
         return "viewall-penerbangan";
     }
@@ -33,6 +35,7 @@ public class PenerbanganController{
 
         // periksa ada pesawat atau tidak
         boolean hasPesawat = penerbangan.getPesawat() !=null;
+
         model.addAttribute("penerbangan", penerbangan);
         model.addAttribute("hasPesawat", hasPesawat);
         return "view-detail-penerbangan";
@@ -42,6 +45,7 @@ public class PenerbanganController{
     public String addPenerbanganForm(Model model){
         // buat penerbangan baru
         PenerbanganModel penerbangan = new PenerbanganModel();
+
         model.addAttribute("penerbangan", penerbangan);
         return "form-add-penerbangan";
     }
@@ -53,6 +57,7 @@ public class PenerbanganController{
     ){
         // simpan penerbangan baru
         penerbanganService.addPenerbangan(penerbangan);
+
         model.addAttribute("penerbangan", penerbangan);
         return "add-penerbangan";
     }
@@ -63,6 +68,7 @@ public class PenerbanganController{
     ){
         // ambil penerbangan dari idnya
         PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(id);
+
         model.addAttribute("penerbangan", penerbangan);
         return "form-update-penerbangan";
     }
@@ -74,6 +80,7 @@ public class PenerbanganController{
     ){
         // update di service
         PenerbanganModel updated = penerbanganService.updatePenerbangan(penerbangan);
+
         model.addAttribute("penerbangan", updated);
         return "update-penerbangan";
     }
@@ -86,6 +93,7 @@ public class PenerbanganController{
         // hapus di service
         PenerbanganModel penerbangan = penerbanganService.getPenerbanganById(id);
         penerbanganService.deletePenerbangan(penerbangan);
+
         model.addAttribute("penerbangan", penerbangan);
         return "delete-penerbangan";
     }

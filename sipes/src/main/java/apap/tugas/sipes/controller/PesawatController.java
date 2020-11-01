@@ -1,4 +1,5 @@
 package apap.tugas.sipes.controller;
+
 import apap.tugas.sipes.model.PenerbanganModel;
 import apap.tugas.sipes.model.PesawatModel;
 import apap.tugas.sipes.model.TeknisiModel;
@@ -79,7 +80,6 @@ public class PesawatController {
         return "view-detail-pesawat";
     }
 
-
     @PostMapping("/pesawat/{id}/tambah-penerbangan")
     public String addPenerbanganToPesawat(
             @PathVariable Long id,
@@ -112,6 +112,7 @@ public class PesawatController {
         // menambahkan penerbangan ke pesawat lalu update
         pesawat.getListPenerbangan().add(penerbangan);
         pesawatService.updatePesawat(pesawat);
+
         // menambahkan pesawat ke penerbangan lalu update
         penerbangan.setPesawat(pesawat);
         penerbanganService.updatePenerbangan(penerbangan);
@@ -186,6 +187,7 @@ public class PesawatController {
     ) {
         // bikin list untuk teknisi
         List<TeknisiModel> listTeknisi = new ArrayList<TeknisiModel>();
+
         // masukin teknisi2 pesawat ke list
         for (TeknisiModel teknisi : pesawat.getListTeknisi()) {
             teknisi = teknisiService.getTeknisiById(teknisi.getId());
@@ -193,8 +195,10 @@ public class PesawatController {
         }
         // simpen ke db
         pesawat.setListTeknisi(listTeknisi);
+
         // simpen pesawat barunya
         pesawatService.addPesawat(pesawat);
+
         model.addAttribute("pesawat", pesawat);
         return "add-pesawat";
     }
@@ -205,6 +209,7 @@ public class PesawatController {
     ) {
         // ambil pesawat dari id
         PesawatModel pesawat = pesawatService.getPesawatById(id);
+
         model.addAttribute("pesawat", pesawat);
         return "form-update-pesawat";
     }
@@ -215,6 +220,7 @@ public class PesawatController {
     ) {
         // update pesawat di service
         PesawatModel updated = pesawatService.updatePesawat(pesawat);
+
         model.addAttribute("pesawat", updated);
         return "update-pesawat";
     }
@@ -232,9 +238,10 @@ public class PesawatController {
             model.addAttribute("pesawat", pesawat);
             return "cannot-delete";
         }
-        else
+
         // delete pesawat di service
         pesawatService.deletePesawat(pesawat);
+
         model.addAttribute("pesawat", pesawat);
         return "delete-pesawat";
     }
@@ -252,9 +259,17 @@ public class PesawatController {
 
         // masukin pesawat yang lebih dari 10 thn ke list
         for (PesawatModel pwt : pesawat) {
+            // ambil tahun sekarang
+            int sekarang = LocalDate.now().getYear();
+
+            // ambil tahun pesawat dibuat
+            int dibuat = pwt.getTanggal_dibuat().getYear();
+
             // ngurangin tahun skrg sama tahun pesawat dibuat
-            int dif = LocalDate.now().getYear() - pwt.getTanggal_dibuat().getYear();
-            if (dif >= 10){
+            int dif = sekarang - dibuat;
+
+            // kalau lebih dari 10 tahun tambahin ke list pesawat tua
+            if (dif > 10){
                 listPesawat.add(pwt);
                 listTahun.add(dif);
             }
@@ -277,6 +292,7 @@ public class PesawatController {
             int jumlah = pwt.getListTeknisi().size();
             total.add(jumlah);
         }
+
         model.addAttribute("pesawat", pesawat);
         model.addAttribute("total", total);
         return "bonus-total-teknisi";
@@ -348,7 +364,7 @@ public class PesawatController {
                     }
                 }
             }
-            Integer size = listPesawat.size();
+            int size = listPesawat.size();
             model.addAttribute("listPesawat", listPesawat);
             model.addAttribute("size", size);
         }
