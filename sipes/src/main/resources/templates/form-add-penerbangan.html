@@ -9,8 +9,9 @@
 <nav th:replace="fragments/fragment :: navbar('Form Tambah Penerbangan')"></nav>
     <br><br>
     <h2 class="text-center">Form Tambah Penerbangan</h2>
-    <div class="card m-5 p-3">
-    <form th:action="@{/penerbangan/tambah}" th:object="${penerbangan}" method="POST">
+    <div class="card col-sm-6 offset-3 shadow p-3 mb-5 bg-white rounded">
+        <br>
+        <form th:action="@{/penerbangan/tambah}" th:object="${penerbangan}" method="POST">
             Nomor Penerbangan : <br>
             <input class="form-control" type="text" th:field="${penerbangan.nomor_penerbangan}" required/>
             <br>
@@ -23,7 +24,11 @@
             Waktu Berangkat : <br>
             <input type="datetime-local" th:field="${penerbangan.waktu_berangkat}" class="form-control"/>
             <br>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <div class="text-center">
+                <a class="btn btn-outline-primary" th:href="@{/penerbangan}">Batal</a>
+                <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
+            <br>
         </form>
     </div>
 </body>

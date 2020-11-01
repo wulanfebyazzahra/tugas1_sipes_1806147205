@@ -6,11 +6,15 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar('Penerbangan')"></nav>
+<nav th:replace="fragments/fragment :: navbar('Detail Penerbangan')"></nav>
+<br><br>
+<h2 class="text-center">Detail Penerbangan</h2>
+<br>
+<div class="card col-sm-4 offset-lg-4 shadow p-3 mb-5 bg-white rounded" style="align-content: center">
+    <br>
 <div class="container">
     <div class="row">
         <div class="col">
-            <p>Id</p>
             <p>Kode Penerbangan</p>
             <p>Bandara Asal</p>
             <p>Bandara Tujuan</p>
@@ -18,7 +22,6 @@
             <p>Nomor seri Pesawat</p>
         </div>
         <div class="col">
-            <p th:text="${penerbangan.id}"></p>
             <p th:text="${penerbangan.nomor_penerbangan}"></p>
             <p th:text="${penerbangan.kode_bandara_asal}"></p>
             <p th:text="${penerbangan.kode_bandara_tujuan}"></p>
@@ -32,6 +35,7 @@
             </div>
             </div>
     </div>
+</div>
 </div>
 </body>
 </html>

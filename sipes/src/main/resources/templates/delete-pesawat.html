@@ -7,12 +7,11 @@
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar('Hapus Pesawat')"></nav>
-<br><br>
+<br><br><br><br><br><br><br><br><br><br>
 <h2 class ="text-center" th:text="'Pesawat dengan nomor seri ' + ${pesawat.nomor_seri} + ' berhasil dihapus!'"></h2>
-<br><br>
+<br>
 <div class="text-center">
     <a class="btn btn-primary" th:href="@{/pesawat}">Daftar Pesawat</a>
 </div>
-
 </body>
 </html>

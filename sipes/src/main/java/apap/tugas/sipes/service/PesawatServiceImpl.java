@@ -33,9 +33,6 @@ public class PesawatServiceImpl implements PesawatService {
         // set tipe
         pesawat.setTipe(tipeService.getTipeById(pesawat.getTipe().getId()));
 
-        // set tanggal hari ini sebagai tanggal dibuat
-        pesawat.setTanggal_dibuat(LocalDate.now());
-
         // set nomor seri
         pesawat.setNomor_seri(noSeri);
 
@@ -115,5 +112,4 @@ public class PesawatServiceImpl implements PesawatService {
         noSeri = jenis + tipe + thndibalik + thntambah + random;
         return noSeri;
     }
-
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <title>Daftar Pesawat</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('Daftar Pesawat')"></nav>
+<br>
+<h2 class="text-center">Daftar Pesawat</h2>
+<div class="text-center">
+    <a class="btn btn-outline-primary" th:href="@{/pesawat/tambah}">+Tambah Pesawat</a>
+</div>
+<div class="card m-5 p-6 shadow p-3 mb-5 bg-white rounded">
+    <table class="table">
+        <thead class="head">
+        <tr>
+            <th>No</th>
+            <th>Nomor Seri</th>
+            <th>Tipe Pesawat</th>
+            <th>Jenis Pesawat</th>
+            <th>Maskapai</th>
+            <th>Jumlah Teknisi</th>
+            <th>Aksi</th>
+        </tr>
+        </thead>
+
+        <tbody class="body">
+        <tr th:each="pesawat, iterationStatus : ${pesawat}">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${pesawat.nomor_seri}"></td>
+            <td th:text="${pesawat.tipe.nama}"></td>
+            <td th:text="${pesawat.jenis_pesawat}"></td>
+            <td th:text="${pesawat.maskapai}"></td>
+            <td th:text="*{total[__${iterationStatus.index}__]}"></td>
+            <td>
+                <a class="btn btn-primary" th:href="@{/pesawat/} + ${pesawat.id}" >Lihat</a>
+                <a class="btn btn-warning" th:href="@{/pesawat/ubah/} + ${pesawat.id}" >Ubah</a>
+                <a class="btn btn-danger" th:href="@{/pesawat/hapus/} + ${pesawat.id}">Hapus</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

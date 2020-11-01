@@ -18,7 +18,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 @Controller
-public class PesawatController{
+public class PesawatController {
 
     @Autowired
     private PesawatService pesawatService;
@@ -33,11 +33,12 @@ public class PesawatController{
     private PenerbanganService penerbanganService;
 
     @GetMapping("/")
-    private String home(){ return "home";
+    private String home() {
+        return "home";
     }
 
     @GetMapping("/pesawat")
-    private String viewAllPesawat(Model model){
+    private String viewAllPesawat(Model model) {
         // ambil semua pesawat
         List<PesawatModel> pesawat = pesawatService.getPesawatList();
 
@@ -49,7 +50,7 @@ public class PesawatController{
     public String viewDetailPesawat(
             @PathVariable Long id,
             Model model
-    ){
+    ) {
         PesawatModel pesawat = pesawatService.getPesawatById(id);
 
         // list teknisi di pesawat
@@ -61,7 +62,7 @@ public class PesawatController{
 
     @GetMapping("/pesawat/tambah")
     public String addPesawatForm(
-            Model model){
+            Model model) {
         // buat pesawat dan teknisi baru
         PesawatModel pesawat = new PesawatModel();
         TeknisiModel teknisi = new TeknisiModel();
@@ -89,11 +90,11 @@ public class PesawatController{
     }
 
 
-    @PostMapping(value="/pesawat/tambah", params={"tambah"})
+    @PostMapping(value = "/pesawat/tambah", params = {"tambah"})
     public String addTeknisi(
-        @ModelAttribute PesawatModel pesawat,
-        Model model
-    ){
+            @ModelAttribute PesawatModel pesawat,
+            Model model
+    ) {
         TeknisiModel teknisi = new TeknisiModel();
 
         // nambahin teknisi baru
@@ -114,11 +115,11 @@ public class PesawatController{
     @PostMapping("/pesawat/tambah")
     public String addPesawatSubmit(
             @ModelAttribute PesawatModel pesawat, Model model
-    ){
+    ) {
         // bikin list untuk teknisi
         List<TeknisiModel> listTeknisi = new ArrayList<TeknisiModel>();
         // masukin teknisi2 pesawat ke list
-        for(TeknisiModel teknisi: pesawat.getListTeknisi()){
+        for (TeknisiModel teknisi : pesawat.getListTeknisi()) {
             teknisi = teknisiService.getTeknisiById(teknisi.getId());
             listTeknisi.add(teknisi);
         }
@@ -133,7 +134,7 @@ public class PesawatController{
     @GetMapping("/pesawat/ubah/{id}")
     public String updatePesawatForm(
             @PathVariable Long id, Model model
-    ){
+    ) {
         // ambil pesawat dari id
         PesawatModel pesawat = pesawatService.getPesawatById(id);
         model.addAttribute("pesawat", pesawat);
@@ -143,7 +144,7 @@ public class PesawatController{
     @PostMapping("/pesawat/ubah")
     public String updatePesawatSubmit(
             @ModelAttribute PesawatModel pesawat, Model model
-    ){
+    ) {
         // update pesawat di service
         PesawatModel updated = pesawatService.updatePesawat(pesawat);
         model.addAttribute("pesawat", updated);
@@ -152,9 +153,9 @@ public class PesawatController{
 
     @GetMapping("/pesawat/hapus/{id}")
     public String deletePesawat(
-        @PathVariable Long id,
-        Model model
-    ){
+            @PathVariable Long id,
+            Model model
+    ) {
         // ambil pesawat dari idnya
         PesawatModel pesawat = pesawatService.getPesawatById(id);
         // delete pesawat di service
@@ -162,3 +163,47 @@ public class PesawatController{
         model.addAttribute("pesawat", pesawat);
         return "delete-pesawat";
     }
+
+    @GetMapping("/pesawat/pesawat-tua")
+    public String findPesawatTua(Model model){
+        // ammbil list pesawat
+        List<PesawatModel> pesawat = pesawatService.getPesawatList();
+
+        // bikin list buat nyimpen pesawat
+        List<PesawatModel> listPesawat = new ArrayList<PesawatModel>();
+
+        // bikin list buat nyimpen tahun pesawat
+        List<Integer> listTahun = new ArrayList<Integer>();
+
+        // masukin pesawat yang lebih dari 10 thn ke list
+        for (PesawatModel pwt : pesawat) {
+            // ngurangin tahun skrg sama tahun pesawat dibuat
+            int dif = LocalDate.now().getYear() - pwt.getTanggal_dibuat().getYear();
+            if (dif >= 10){
+                listPesawat.add(pwt);
+                listTahun.add(dif);
+            }
+        }
+        model.addAttribute("listPesawat", listPesawat);
+        model.addAttribute("listTahun", listTahun);
+        return "view-pesawat-tua";
+    }
+
+    @GetMapping("/pesawat/bonus")
+    private String bonusTotalTeknisi(Model model) {
+        // ambil list pesawat
+        List<PesawatModel> pesawat = pesawatService.getPesawatList();
+
+        // list untuk total teknisi
+        List<Integer> total = new ArrayList<Integer>();
+
+        // masukin total teknisi2 ke list
+        for (PesawatModel pwt : pesawat) {
+            int jumlah = pwt.getListTeknisi().size();
+            total.add(jumlah);
+        }
+        model.addAttribute("pesawat", pesawat);
+        model.addAttribute("total", total);
+        return "bonus-total-teknisi";
+    }
+}

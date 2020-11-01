@@ -9,7 +9,8 @@
 <nav th:replace="fragments/fragment :: navbar('Form Ubah Penerbangan')"></nav>
     <br><br>
     <h2 class="text-center">Form Ubah Penerbangan</h2>
-    <div class="card m-5 p-3">
+    <div class="card col-sm-6 offset-3 shadow p-3 mb-5 bg-white rounded">
+        <br>
         <form th:action="@{/penerbangan/ubah}" th:object="${penerbangan}" method="POST">
             <input class="form-control" type="hidden" th:field="*{id}"/>
             Nomor Penerbangan : <br>
@@ -24,8 +25,12 @@
             Waktu Berangkat : <br>
             <input type="datetime-local" th:field="*{waktu_berangkat}" class="form-control"/>
             <br>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <div class="text-center">
+                <a class="btn btn-outline-primary" th:href="@{/penerbangan}">Batal</a>
+                <button class="btn btn-primary" style="position: center" type="submit">Submit</button>
+            </div>
         </form>
+        <br>
     </div>
 </body>
 </html>

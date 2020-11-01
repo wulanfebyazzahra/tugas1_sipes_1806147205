@@ -9,7 +9,8 @@
 <nav th:replace="fragments/fragment :: navbar('Form Tambah Pesawat')"></nav>
     <br><br>
     <h2 class="text-center">Form Tambah Pesawat</h2>
-    <div class="card m-5 p-3">
+    <div class="card col-sm-6 offset-3 shadow p-3 mb-5 bg-white rounded">
+        <br>
         <form th:action="@{/pesawat/tambah}" th:object="${pesawat}" method="POST">
         <div class="container">
             <div class="row">
@@ -62,11 +63,14 @@
                 </div>
             </div>
         </div>
-            <br><br>
+            <br>
             <div class="text-center">
-            <button class="btn btn-primary" style="position: center" type="submit">Submit</button>
+                <a class="btn btn-outline-primary" th:href="@{/pesawat}">Batal</a>
+                <button class="btn btn-primary" style="position: center" type="submit">Submit</button>
             </div>
+            <br>
         </form>
     </div>
+<br><br><br><br>
 </body>
 </html>

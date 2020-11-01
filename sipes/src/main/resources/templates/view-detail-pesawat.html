@@ -6,11 +6,14 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar('Pesawat')"></nav>
+<nav th:replace="fragments/fragment :: navbar('Detail Pesawat')"></nav>
+<br><br>
+<h2 class="text-center">Detail Pesawat</h2>
+<div class="card col-sm-4 offset-lg-4 shadow p-3 mb-5 bg-white rounded" style="align-content: center">
+    <br>
 <div class="container">
     <div class="row">
         <div class="col">
-            <p>Id</p>
             <p>No Seri</p>
             <p>Jenis Pesawat</p>
             <p>Nama Tipe</p>
@@ -19,7 +22,6 @@
             <p>Tanggal Dibuat</p>
         </div>
         <div class="col">
-            <p th:text="${pesawat.id}"></p>
             <p th:text="${pesawat.nomor_seri}"></p>
             <p th:text="${pesawat.jenis_pesawat}"></p>
             <p th:text="${pesawat.tipe.nama}"></p>
@@ -29,22 +31,27 @@
         </div>
     </div>
 </div>
+</div>
+</div>
 
+<h5 class="text-center">Daftar Teknisi Pesawat</h5>
+<div class="card col-sm-4 offset-lg-4 p-4 shadow p-3 mb-5 bg-white rounded" style="align-content: center">
 <table class="table">
     <thead>
     <tr>
-        <th>Id</th>
+        <th>No</th>
         <th>Nama</th>
-        <th>No Telp</th>
+        <th>Nomor Telepon</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="teknisi, iterationStatus: ${listTeknisi}">
-        <td th:text="${teknisi.id}"></td>
+        <td th:text="${iterationStatus.count}"></td>
         <td th:text="${teknisi.nama}"></td>
         <td th:text="${teknisi.nomor_telepon}"></td>
     </tr>
     </tbody>
 </table>
+</div>
 </body>
 </html>
