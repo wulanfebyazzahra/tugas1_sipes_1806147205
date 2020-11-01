@@ -6,32 +6,33 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar('Daftar Pesawat Tua')"></nav>
-<br>
-<div class="card m-5 p-6 shadow p-3 mb-5 bg-white rounded">
-    <h2 class="text-center">Daftar Pesawat Tua</h2>
-    <table class="table">
-                <thead class="head">
-                <tr>
-                    <th>No</th>
-                    <th>Nomor Seri</th>
-                    <th>Jenis</th>
-                    <th>Tipe</th>
-                    <th>Usia</th>
-                </tr>
-                </thead>
-                <tbody class="body">
-                <tr th:each="pesawat, iterationStatus : ${listPesawat}">
-                    <td th:text="${iterationStatus.count}"></td>
-                    <td th:text="${pesawat.nomor_seri}"></td>
-                    <td th:text="${pesawat.jenis_pesawat}"></td>
-                    <td th:text="${pesawat.tipe.nama}"></td>
-                    <td th:text="*{listTahun[__${iterationStatus.index}__]}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <nav th:replace="fragments/fragment :: navbar('Daftar Pesawat Tua')"></nav>
+    <br>
+
+    <div class="card m-5 p-6 shadow p-3 mb-5 bg-white rounded">
+        <h2 class="text-center">Daftar Pesawat Tua</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Nomor Seri</th>
+                <th>Jenis</th>
+                <th>Tipe</th>
+                <th>Usia</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="pesawat, iterationStatus : ${listPesawat}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${pesawat.nomor_seri}"></td>
+                <td th:text="${pesawat.jenis_pesawat}"></td>
+                <td th:text="${pesawat.tipe.nama}"></td>
+                <td th:text="*{listTahun[__${iterationStatus.index}__]}"></td>
+            </tr>
+            </tbody>
+
+        </table>
     </div>
-</div>
 </body>
 </html>

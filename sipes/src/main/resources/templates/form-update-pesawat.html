@@ -6,35 +6,35 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar('Form Ubah Pesawat')"></nav>
-<br><br>
-<div class="card col-sm-6 offset-3 shadow p-3 mb-5 bg-white rounded">
-    <h2 class="text-center">Form Update Pesawat</h2>
-    <br>
-    <form th:action="@{/pesawat/ubah}" th:object="${pesawat}" method="POST">
-        <input class="form-control" type="hidden" th:field="*{id}"/>
-        <input class="form-control" type="hidden" th:field="*{tipe.id}"/>
-        Maskapai : <br>
-        <input class="form-control" type="text" th:field="*{maskapai}"/>
+    <nav th:replace="fragments/fragment :: navbar('Form Ubah Pesawat')"></nav>
+    <br><br>
+    <div class="card col-sm-6 offset-3 shadow p-3 mb-5 bg-white rounded">
+        <h2 class="text-center">Form Update Pesawat</h2>
         <br>
-        Tanggal Dibuat : <br>
-        <input type="date" th:field="*{tanggal_dibuat}" class="form-control"/>
+        <form th:action="@{/pesawat/ubah}" th:object="${pesawat}" method="POST">
+            <input class="form-control" type="hidden" th:field="*{id}"/>
+            <input class="form-control" type="hidden" th:field="*{tipe.id}"/>
+            Maskapai : <br>
+            <input class="form-control" type="text" th:field="*{maskapai}"/>
+            <br>
+            Tanggal Dibuat : <br>
+            <input type="date" th:field="*{tanggal_dibuat}" class="form-control"/>
+            <br>
+            Tempat Dibuat : <br>
+            <input class="form-control" type="text" th:field="*{tempat_dibuat}"/>
+            <br>
+            Jenis Pesawat : <br>
+            <select th:field="*{jenis_pesawat}" class="form-control">
+                <option value="Komersial">Komersial</option>
+                <option value="Militer">Militer</option>
+            </select>
+            <br>
+            <div class="text-center">
+                <a class="btn btn-outline-primary" th:href="@{/pesawat}">Batal</a>
+                <button class="btn btn-primary" style="position: center" type="submit">Simpan</button>
+            </div>
+        </form>
         <br>
-        Tempat Dibuat : <br>
-        <input class="form-control" type="text" th:field="*{tempat_dibuat}"/>
-        <br>
-        Jenis Pesawat : <br>
-        <select th:field="*{jenis_pesawat}" class="form-control">
-            <option value="Komersial">Komersial</option>
-            <option value="Militer">Militer</option>
-        </select>
-        <br>
-        <div class="text-center">
-            <a class="btn btn-outline-primary" th:href="@{/pesawat}">Batal</a>
-            <button class="btn btn-primary" style="position: center" type="submit">Simpan</button>
-        </div>
-    </form>
-    <br>
-</div>
+    </div>
 </body>
 </html>

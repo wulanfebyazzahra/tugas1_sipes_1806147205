@@ -9,13 +9,14 @@
     <nav th:replace="fragments/fragment :: navbar('Daftar Pesawat')"></nav>
     <br>
     <h2 class="text-center">Daftar Pesawat</h2>
+
     <div class="text-center">
         <a class="btn btn-outline-primary" th:href="@{/pesawat/tambah}">+Tambah Pesawat</a>
     </div>
 
     <div class="card m-5 p-6 shadow p-3 mb-5 bg-white rounded">
         <table class="table">
-            <thead class="head">
+            <thead>
                 <tr>
                     <th>No</th>
                     <th>Nomor Seri</th>
@@ -27,7 +28,7 @@
                 </tr>
             </thead>
 
-            <tbody class="body">
+            <tbody>
                 <tr th:each="pesawat, iterationStatus : ${pesawat}">
                     <td th:text="${iterationStatus.count}"></td>
                     <td th:text="${pesawat.nomor_seri}"></td>
@@ -42,6 +43,7 @@
                     </td>
                 </tr>
             </tbody>
+
         </table>
     </div>
 </body>

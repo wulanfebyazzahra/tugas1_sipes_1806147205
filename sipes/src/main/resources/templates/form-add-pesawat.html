@@ -6,8 +6,9 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar('Form Tambah Pesawat')"></nav>
+    <nav th:replace="fragments/fragment :: navbar('Form Tambah Pesawat')"></nav>
     <br><br>
+
     <div class="card col-sm-6 offset-3 shadow p-3 mb-5 bg-white rounded">
         <h2 class="text-center">Form Tambah Pesawat</h2>
         <br>
@@ -55,8 +56,6 @@
                                                 th:utext="${teknisi.nama}"></option>
                                 </select>
                             </td>
-                            <td>
-                            </td>
                         </tr>
                     </table>
                     <br>
@@ -72,6 +71,7 @@
             <br>
         </form>
     </div>
+
 <br><br><br><br>
 </body>
 </html>

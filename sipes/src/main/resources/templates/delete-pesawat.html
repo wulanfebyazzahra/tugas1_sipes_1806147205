@@ -6,10 +6,12 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar('Hapus Pesawat')"></nav>
+    <nav th:replace="fragments/fragment :: navbar('Hapus Pesawat')"></nav>
     <br><br><br><br><br><br><br><br><br><br>
+
     <h2 class ="text-center" th:text="'Pesawat dengan nomor seri ' + ${pesawat.nomor_seri} + ' berhasil dihapus!'"></h2>
     <br>
+
     <div class="text-center">
         <a class="btn btn-primary" th:href="@{/pesawat}">Daftar Pesawat</a>
     </div>

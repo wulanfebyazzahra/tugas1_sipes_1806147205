@@ -8,8 +8,10 @@
 <body>
     <nav th:replace="fragments/fragment :: navbar('Tambah Penerbangan')"></nav>
     <br><br><br><br><br><br><br><br><br><br>
+
     <h2 class ="text-center" th:text="'Penerbangan dengan nomor penerbangan ' + ${penerbangan.nomor_penerbangan} + ' berhasil ditambahkan!'"></h2>
     <br>
+
     <div class="text-center">
         <a class="btn btn-primary" th:href="@{/penerbangan}">Daftar Penerbangan</a>
     </div>
